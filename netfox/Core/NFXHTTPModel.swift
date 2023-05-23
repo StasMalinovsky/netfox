@@ -92,6 +92,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         
         saveResponseBodyData(data)
         formattedResponseLogEntry().appendToFileURL(NFXPath.sessionLogURL)
+        NFX.sharedInstance().delegate?.didSaveResponse(forModel: self)
     }
     
     func saveRequestBodyData(_ data: Data) {
