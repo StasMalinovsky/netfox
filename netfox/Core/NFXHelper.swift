@@ -543,7 +543,7 @@ private extension UIScene.ActivationState {
 #endif
 
 
-class Publisher<T> {
+public class Publisher<T> {
     
     private var subscriptions = Set<Subscription<T>>()
     
@@ -553,11 +553,11 @@ class Publisher<T> {
     
     init() { }
     
-    func subscribe(_ subscription: Subscription<T>) {
+    public func subscribe(_ subscription: Subscription<T>) {
         subscriptions.insert(subscription)
     }
     
-    @discardableResult func subscribe(_ callback: @escaping (T) -> Void) -> Subscription<T> {
+    @discardableResult public func subscribe(_ callback: @escaping (T) -> Void) -> Subscription<T> {
         let subscription = Subscription(callback)
         subscriptions.insert(subscription)
         return subscription
@@ -591,7 +591,7 @@ class Publisher<T> {
     
 }
 
-class Subscription<T>: Equatable, Hashable {
+public class Subscription<T>: Equatable, Hashable {
     
     let id = UUID()
     private(set) var isCancelled = false
@@ -601,15 +601,15 @@ class Subscription<T>: Equatable, Hashable {
         self.callback = callback
     }
     
-    func cancel() {
+    public func cancel() {
         isCancelled = true
     }
     
-    static func == (lhs: Subscription<T>, rhs: Subscription<T>) -> Bool {
+    public static func == (lhs: Subscription<T>, rhs: Subscription<T>) -> Bool {
         lhs.id == rhs.id
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     

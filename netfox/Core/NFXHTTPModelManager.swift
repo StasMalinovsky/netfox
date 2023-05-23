@@ -8,11 +8,11 @@
 import Foundation
 
 
-final class NFXHTTPModelManager: NSObject {
+final public class NFXHTTPModelManager: NSObject {
     
-    static let shared = NFXHTTPModelManager()
+    public static let shared = NFXHTTPModelManager()
     
-    let publisher = Publisher<[NFXHTTPModel]>()
+    public let publisher = Publisher<[NFXHTTPModel]>()
        
     /// Not thread safe. Use only from main thread/queue
     private(set) var models = [NFXHTTPModel]() {

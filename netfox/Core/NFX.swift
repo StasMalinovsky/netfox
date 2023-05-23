@@ -49,9 +49,7 @@ open class NFX: NSObject {
     fileprivate var ignoredURLs = [String]()
     fileprivate var ignoredURLsRegex = [NSRegularExpression]()
     fileprivate var lastVisitDate: Date = Date()
-    
-    public var delegate: NFXDelegate?
-    
+        
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
     
     // swiftSharedInstance is not accessible from ObjC
@@ -357,8 +355,3 @@ extension NFX {
 }
 
 #endif
-
-@objc public protocol NFXDelegate {
-    
-    func didSaveResponse(forModel model: NFXHTTPModel)
-}
