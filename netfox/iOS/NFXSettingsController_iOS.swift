@@ -239,17 +239,9 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     }
 
     func shareSessionLogsPressed() {
-        if (MFMailComposeViewController.canSendMail()) {
-            let mailComposer = MFMailComposeViewController()
-            mailComposer.mailComposeDelegate = self
-            
-            mailComposer.setSubject("netfox log - Session Log \(NSDate())")
-            if let sessionLogData = try? Data(contentsOf: NFXPath.sessionLogURL) {
-                mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: NFXPath.sessionLogName)
-            }
-            
-            present(mailComposer, animated: true, completion: nil)
-        }
+        let activityViewController = UIActivityViewController(activityItems: [NFXPath.sessionLogURL], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(activityViewController, animated: true)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
